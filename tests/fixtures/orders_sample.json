@@ -1,0 +1,10 @@
+{"order_num": 1, "order_id": 101, "user_id": 11, "order_timestamp": "2025-04-01 08:15:00", "total_amount": 34.50, "date": "2025-04-01"}
+{"order_num": 2, "order_id": 102, "user_id": 12, "order_timestamp": "2025-04-02 09:30:00", "total_amount": 17.99, "date": "2025-04-02"}
+{"order_num": 3, "order_id": 103, "user_id": 13, "order_timestamp": "2025-04-03 11:00:00", "total_amount": 52.10, "date": "2025-04-03"}
+{"order_num": 4, "order_id": 104, "user_id": 14, "order_timestamp": "2025-04-04 13:45:00", "total_amount": 8.75, "date": "2025-04-04"}
+{"order_num": 5, "order_id": 105, "user_id": 15, "order_timestamp": "2025-04-05 16:20:00", "total_amount": 99.00, "date": "2025-04-05"}
+{"order_num": 6, "order_id": 106, "user_id": 11, "order_timestamp": "2025-04-07 10:00:00", "total_amount": 22.30, "date": "2025-04-07"}
+{"order_num": 7, "order_id": 107, "user_id": 16, "order_timestamp": "2025-04-08 14:00:00", "total_amount": 43.60, "date": "2025-04-08"}
+{"order_num": 8, "order_id": 108, "user_id": 17, "order_timestamp": "2025-04-09 07:50:00", "total_amount": 11.25, "date": "2025-04-09"}
+{"order_num": 9, "order_id": 109, "user_id": 18, "order_timestamp": "2025-04-10 12:00:00", "total_amount": 65.00, "date": "2025-04-10"}
+{"order_num": 10, "order_id": 110, "user_id": 19, "order_timestamp": "2025-04-11 15:30:00", "total_amount": 29.99, "date": "2025-04-11"}

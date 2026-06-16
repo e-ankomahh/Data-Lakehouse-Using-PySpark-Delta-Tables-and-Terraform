@@ -1,0 +1,5 @@
+{"id": null, "order_id": 101, "user_id": 11, "days_since_prior_order": null, "product_id": 1, "add_to_cart_order": 1, "reordered": 0, "order_timestamp": "2025-04-01 08:15:00", "date": "2025-04-01"}
+{"id": 2001, "order_id": 999, "user_id": 99, "days_since_prior_order": 5, "product_id": 1, "add_to_cart_order": 1, "reordered": 0, "order_timestamp": "2025-04-01 08:15:00", "date": "2025-04-01"}
+{"id": 2002, "order_id": 101, "user_id": 11, "days_since_prior_order": null, "product_id": 2, "add_to_cart_order": 2, "reordered": 2, "order_timestamp": "2025-04-01 08:15:00", "date": "2025-04-01"}
+{"id": 1003, "order_id": 102, "user_id": 12, "days_since_prior_order": 7, "product_id": 2, "add_to_cart_order": 1, "reordered": 1, "order_timestamp": "2025-04-02 09:30:00", "date": "2025-04-02"}
+{"id": 1003, "order_id": 102, "user_id": 12, "days_since_prior_order": 7, "product_id": 3, "add_to_cart_order": 2, "reordered": 1, "order_timestamp": "2025-04-02 09:30:00", "date": "2025-04-02"}

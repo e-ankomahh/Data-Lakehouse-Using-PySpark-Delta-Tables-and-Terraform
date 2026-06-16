@@ -1,0 +1,16 @@
+product_id,department_id,department,product_name
+1,4,produce,Bag of Organic Bananas
+2,4,produce,Organic Strawberries
+3,16,dairy eggs,Organic Whole Milk
+4,21,bakery,Organic Bread
+5,7,beverages,Sparkling Water
+6,13,pantry,Organic Extra Virgin Olive Oil
+7,4,produce,Organic Avocado
+8,16,dairy eggs,Large Free Range Eggs
+9,21,bakery,Sourdough Bread
+10,7,beverages,Kombucha Original
+11,1,frozen,Frozen Blueberries
+12,1,frozen,Organic Edamame
+13,9,meat seafood,Atlantic Salmon Fillet
+14,9,meat seafood,Organic Ground Turkey
+15,11,international,Jasmine Rice

@@ -1,0 +1,5 @@
+{"order_num": 1, "order_id": null, "user_id": 11, "order_timestamp": "2025-04-01 08:15:00", "total_amount": 34.50, "date": "2025-04-01"}
+{"order_num": 2, "order_id": 102, "user_id": 12, "order_timestamp": "2025-04-02 09:30:00", "total_amount": -5.00, "date": "2025-04-02"}
+{"order_num": 3, "order_id": 103, "user_id": 13, "order_timestamp": "2015-01-01 00:00:00", "total_amount": 52.10, "date": "2015-01-01"}
+{"order_num": 4, "order_id": 104, "user_id": 14, "order_timestamp": "2025-04-04 13:45:00", "total_amount": 0.00, "date": "2025-04-04"}
+{"order_num": 5, "order_id": 105, "user_id": 15, "order_timestamp": "2025-04-05 16:20:00", "total_amount": 99.00, "date": "2025-04-05"}

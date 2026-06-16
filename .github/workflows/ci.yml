@@ -2,8 +2,8 @@ name: CI
 
 # Runs on every PR to main. Expands incrementally:
 #   Commit 1  — placeholder (this file created, CI coverage from day one)
-#   Commit 7  — lint step activated        ← HERE
-#   Commit 11 — unit-tests step activated
+#   Commit 7  — lint step activated
+#   Commit 11 — unit-tests step activated  ← HERE
 #   Commit 15 — coverage gate + terraform-plan step activated
 
 on:
@@ -35,3 +35,21 @@ jobs:
 
       - name: black check
         run: black --check src/ tests/ config/
+
+  unit-tests:
+    name: Unit Tests
+    runs-on: ubuntu-latest
+    needs: lint
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements-dev.txt
+
+      - name: Run unit tests
+        run: pytest tests/unit/ -v --tb=short

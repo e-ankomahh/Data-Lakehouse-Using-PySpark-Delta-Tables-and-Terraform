@@ -1,0 +1,13 @@
+variable "environment"              { type = string }
+variable "aws_region"               { type = string }
+variable "account_id"               { type = string }
+variable "sfn_role_arn"             { type = string }
+variable "products_job_name"        { type = string }
+variable "orders_job_name"          { type = string }
+variable "order_items_job_name"     { type = string }
+variable "products_crawler_name"    { type = string }
+variable "orders_crawler_name"      { type = string }
+variable "order_items_crawler_name" { type = string }
+variable "archive_lambda_arn"       { type = string }
+variable "sns_alert_topic_arn"      { type = string }
+variable "kms_key_arn"              { type = string }

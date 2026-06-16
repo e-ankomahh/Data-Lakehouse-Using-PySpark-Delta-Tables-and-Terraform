@@ -1,0 +1,25 @@
+name: CI
+
+# Runs on every PR to main. Expands incrementally:
+#   Commit 1  — placeholder (this file created, CI coverage from day one)
+#   Commit 7  — lint step activated
+#   Commit 11 — unit-tests step activated
+#   Commit 15 — coverage gate + terraform-plan step activated
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  id-token: write
+  contents: read
+  pull-requests: write
+
+jobs:
+  ci-placeholder:
+    name: CI Running (expanding per phase)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Confirm CI is active
+        run: echo "CI pipeline active — steps will be added as the codebase grows."

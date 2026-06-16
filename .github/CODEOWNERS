@@ -1,0 +1,9 @@
+# All changes require review from the data engineering team.
+# Replace @org/data-engineering with your actual GitHub team.
+@evans-ankomah/data-engineering
+
+# Infrastructure changes require an additional infra review.
+/infrastructure/ @evans-ankomah/data-engineering 
+
+# CI/CD workflow changes require explicit infra approval.
+/.github/workflows/ @evans-ankomah/data-engineering

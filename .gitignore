@@ -1,0 +1,81 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg
+*.egg-info/
+dist/
+build/
+eggs/
+parts/
+var/
+sdist/
+develop-eggs/
+.installed.cfg
+lib/
+lib64/
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Testing and coverage
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+coverage.xml
+*.cover
+
+# IDEs
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Terraform
+**/.terraform/
+**/.terraform.lock.hcl
+*.tfstate
+*.tfstate.backup
+*.tfplan
+terraform.tfvars
+!*.tfvars.example
+crash.log
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# OS
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Raw data files — these live in S3, not git
+Data/*.xlsx
+Data/*.csv
+
+# Secrets and credentials — NEVER commit these
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+credentials
+aws_credentials
+
+# Build artifacts
+*.whl
+*.tar.gz
+
+# Spark local mode output
+/tmp/lakehouse/
+spark-warehouse/
+metastore_db/
+derby.log

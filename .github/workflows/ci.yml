@@ -3,8 +3,8 @@ name: CI
 # Runs on every PR to main. Expands incrementally:
 #   Commit 1  — placeholder (this file created, CI coverage from day one)
 #   Commit 7  — lint step activated
-#   Commit 11 — unit-tests step activated  ← HERE
-#   Commit 15 — coverage gate + terraform-plan step activated
+#   Commit 11 — unit-tests step activated
+#   Commit 15 — coverage gate + terraform-plan step activated  ← HERE
 
 on:
   pull_request:
@@ -51,5 +51,71 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements-dev.txt
 
-      - name: Run unit tests
-        run: pytest tests/unit/ -v --tb=short
+      - name: Run unit tests with coverage gate
+        run: pytest tests/unit/ -v --tb=short --cov=src --cov-report=term-missing --cov-fail-under=80
+
+  terraform-plan:
+    name: Terraform Plan (dev)
+    runs-on: ubuntu-latest
+    needs: unit-tests
+    defaults:
+      run:
+        working-directory: infrastructure/environments/dev
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configure AWS credentials (OIDC)
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_DEV_ROLE_ARN }}
+          aws-region: us-east-1
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: "~> 1.7"
+
+      - name: Terraform Init
+        id: init
+        run: terraform init -input=false
+
+      - name: Terraform Validate
+        id: validate
+        run: terraform validate
+
+      - name: Terraform Plan
+        id: plan
+        run: terraform plan -input=false -no-color
+        continue-on-error: true
+
+      - name: Post plan as PR comment
+        uses: actions/github-script@v7
+        if: always()
+        env:
+          PLAN_STDOUT: ${{ steps.plan.outputs.stdout }}
+          PLAN_OUTCOME: ${{ steps.plan.outcome }}
+        with:
+          script: |
+            const plan = process.env.PLAN_STDOUT || '(no output captured)';
+            const outcome = process.env.PLAN_OUTCOME;
+            const icon = outcome === 'success' ? '✅' : '❌';
+            const truncated = plan.length > 60000
+              ? '...(truncated — see full log in Actions)\n' + plan.slice(-60000)
+              : plan;
+            const body = [
+              `## Terraform Plan ${icon} — dev environment`,
+              '```hcl',
+              truncated,
+              '```',
+            ].join('\n');
+            await github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body,
+            });
+
+      - name: Fail if plan failed
+        if: steps.plan.outcome == 'failure'
+        run: exit 1

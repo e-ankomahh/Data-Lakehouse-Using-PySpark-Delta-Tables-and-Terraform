@@ -1,9 +1,7 @@
-# All changes require review from the data engineering team.
-# Replace @org/data-engineering with your actual GitHub team.
-@evans-ankomah/data-engineering
+# All files — repository owner must approve every PR.
+*                       @evans-ankomah
 
-# Infrastructure changes require an additional infra review.
-/infrastructure/ @evans-ankomah/data-engineering 
-
-# CI/CD workflow changes require explicit infra approval.
-/.github/workflows/ @evans-ankomah/data-engineering
+# Infrastructure and CI/CD are called out explicitly so the GitHub PR UI
+# shows the requirement even when only a subset of files changes.
+/infrastructure/        @evans-ankomah
+/.github/               @evans-ankomah

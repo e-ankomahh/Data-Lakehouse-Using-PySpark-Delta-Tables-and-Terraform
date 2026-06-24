@@ -1,0 +1,52 @@
+name: Integration Tests
+
+# Runs weekly (Monday 06:00 UTC) and on manual dispatch.
+# Can be extended to run against real AWS by supplying OIDC credentials.
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: "Target environment (dev / staging)"
+        required: false
+        default: "dev"
+  schedule:
+    - cron: "0 6 * * 1"   # Weekly — Monday 06:00 UTC
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  integration-tests:
+    name: Integration Tests (${{ github.event.inputs.environment || 'dev' }})
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements-dev.txt
+
+      # Optional: uncomment to run against real AWS instead of local filesystem paths.
+      # - name: Configure AWS credentials (OIDC)
+      #   uses: aws-actions/configure-aws-credentials@v4
+      #   with:
+      #     role-to-assume: ${{ secrets.AWS_DEV_ROLE_ARN }}
+      #     aws-region: us-east-1
+
+      - name: Run integration tests
+        run: pytest tests/integration/ -v --tb=short
+
+      - name: Upload test report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: integration-test-results-${{ github.run_id }}
+          path: |
+            .pytest_cache/
+          retention-days: 14

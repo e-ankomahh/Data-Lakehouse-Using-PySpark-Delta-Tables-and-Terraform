@@ -1,7 +1,7 @@
 # All files — repository owner must approve every PR.
-*                       @evans-ankomah
+*                       @e-ankomahh
 
 # Infrastructure and CI/CD are called out explicitly so the GitHub PR UI
 # shows the requirement even when only a subset of files changes.
-/infrastructure/        @evans-ankomah
-/.github/               @evans-ankomah
+/infrastructure/        @e-ankomahh
+/.github/               @e-ankomahh

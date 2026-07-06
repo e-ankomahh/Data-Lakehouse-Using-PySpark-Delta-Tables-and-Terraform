@@ -27,3 +27,8 @@ output "sns_alert_topic_arn" {
   description = "ARN of the SNS topic for pipeline alerts."
   value       = module.sns.alert_topic_arn
 }
+
+output "github_actions_role_arn" {
+  description = "ARN of the IAM role for GitHub Actions OIDC authentication."
+  value       = module.iam.github_actions_role_arn
+}

@@ -66,6 +66,7 @@ module "sns" {
 module "monitoring" {
   source      = "./modules/monitoring"
   environment = var.environment
+  aws_region  = var.aws_region
   kms_key_arn = module.kms.logs_key_arn
 
   sns_alert_topic_arn = module.sns.alert_topic_arn

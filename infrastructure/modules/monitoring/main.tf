@@ -9,13 +9,11 @@ resource "aws_cloudwatch_log_group" "glue_jobs" {
 
   name              = "/aws/glue/jobs/lakehouse-${var.environment}-${each.key}"
   retention_in_days = 30
-  kms_key_id        = var.kms_key_arn
 }
 
 resource "aws_cloudwatch_log_group" "step_functions" {
   name              = "/aws/states/lakehouse-pipeline-${var.environment}"
   retention_in_days = 30
-  kms_key_id        = var.kms_key_arn
 }
 
 # ── CloudWatch Metric Filters ─────────────────────────────────────────────────
@@ -28,14 +26,9 @@ resource "aws_cloudwatch_log_metric_filter" "glue_errors" {
   pattern        = "{ $.level = \"ERROR\" }"
 
   metric_transformation {
-    name          = "LakehouseGlueErrors"
-    namespace     = "Lakehouse/Pipeline"
-    value         = "1"
-    default_value = "0"
-    dimensions = {
-      JobName     = each.key
-      Environment = var.environment
-    }
+    name      = "LakehouseGlueErrors"
+    namespace = "Lakehouse/Pipeline"
+    value     = "1"
   }
 }
 
@@ -47,14 +40,9 @@ resource "aws_cloudwatch_log_metric_filter" "quarantine_records" {
   pattern        = "{ $.records_rejected > 0 }"
 
   metric_transformation {
-    name          = "LakehouseQuarantineRecords"
-    namespace     = "Lakehouse/Pipeline"
-    value         = "$.records_rejected"
-    default_value = "0"
-    dimensions = {
-      JobName     = each.key
-      Environment = var.environment
-    }
+    name      = "LakehouseQuarantineRecords"
+    namespace = "Lakehouse/Pipeline"
+    value     = "$.records_rejected"
   }
 }
 
@@ -66,14 +54,9 @@ resource "aws_cloudwatch_log_metric_filter" "job_completions" {
   pattern        = "{ $.event = \"JOB_COMPLETE\" }"
 
   metric_transformation {
-    name          = "LakehouseJobCompletions"
-    namespace     = "Lakehouse/Pipeline"
-    value         = "1"
-    default_value = "0"
-    dimensions = {
-      JobName     = each.key
-      Environment = var.environment
-    }
+    name      = "LakehouseJobCompletions"
+    namespace = "Lakehouse/Pipeline"
+    value     = "1"
   }
 }
 
@@ -119,6 +102,7 @@ resource "aws_cloudwatch_dashboard" "lakehouse" {
         type = "metric"
         properties = {
           title   = "Glue Errors"
+          region  = var.aws_region
           metrics = [["Lakehouse/Pipeline", "LakehouseGlueErrors", "Environment", var.environment]]
           period  = 300
           stat    = "Sum"
@@ -129,6 +113,7 @@ resource "aws_cloudwatch_dashboard" "lakehouse" {
         type = "metric"
         properties = {
           title   = "Quarantine Records"
+          region  = var.aws_region
           metrics = [["Lakehouse/Pipeline", "LakehouseQuarantineRecords", "Environment", var.environment]]
           period  = 300
           stat    = "Sum"
@@ -139,6 +124,7 @@ resource "aws_cloudwatch_dashboard" "lakehouse" {
         type = "metric"
         properties = {
           title   = "Job Completions"
+          region  = var.aws_region
           metrics = [["Lakehouse/Pipeline", "LakehouseJobCompletions", "Environment", var.environment]]
           period  = 300
           stat    = "Sum"

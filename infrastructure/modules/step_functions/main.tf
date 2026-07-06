@@ -17,7 +17,7 @@ locals {
             States = {
               RunProductsJob = {
                 Type     = "Task"
-                Resource = "arn:aws:states:::glue:startJobRun.sync:2"
+                Resource = "arn:aws:states:::glue:startJobRun.sync"
                 Parameters = {
                   JobName = var.products_job_name
                   Arguments = {
@@ -62,7 +62,7 @@ locals {
             States = {
               RunOrdersJob = {
                 Type     = "Task"
-                Resource = "arn:aws:states:::glue:startJobRun.sync:2"
+                Resource = "arn:aws:states:::glue:startJobRun.sync"
                 Parameters = {
                   JobName = var.orders_job_name
                   Arguments = {
@@ -89,7 +89,7 @@ locals {
               }
               RunOrderItemsJob = {
                 Type     = "Task"
-                Resource = "arn:aws:states:::glue:startJobRun.sync:2"
+                Resource = "arn:aws:states:::glue:startJobRun.sync"
                 Parameters = {
                   JobName = var.order_items_job_name
                   Arguments = {
@@ -139,7 +139,7 @@ locals {
 
       RunProductsCrawler = {
         Type     = "Task"
-        Resource = "arn:aws:states:::glue:startCrawler.sync:2"
+        Resource = "arn:aws:states:::aws-sdk:glue:startCrawler"
         Parameters = { Name = var.products_crawler_name }
         Catch = [
           {
@@ -153,7 +153,7 @@ locals {
 
       RunOrdersCrawler = {
         Type     = "Task"
-        Resource = "arn:aws:states:::glue:startCrawler.sync:2"
+        Resource = "arn:aws:states:::aws-sdk:glue:startCrawler"
         Parameters = { Name = var.orders_crawler_name }
         Catch = [
           {
@@ -167,7 +167,7 @@ locals {
 
       RunOrderItemsCrawler = {
         Type     = "Task"
-        Resource = "arn:aws:states:::glue:startCrawler.sync:2"
+        Resource = "arn:aws:states:::aws-sdk:glue:startCrawler"
         Parameters = { Name = var.order_items_crawler_name }
         Catch = [
           {
@@ -248,7 +248,6 @@ locals {
 resource "aws_cloudwatch_log_group" "sfn_logs" {
   name              = "/aws/states/lakehouse-pipeline-${var.environment}"
   retention_in_days = 30
-  kms_key_id        = var.kms_key_arn
 }
 
 resource "aws_sfn_state_machine" "lakehouse_pipeline" {

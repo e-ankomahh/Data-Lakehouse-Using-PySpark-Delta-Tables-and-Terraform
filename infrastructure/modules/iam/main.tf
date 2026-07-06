@@ -400,6 +400,11 @@ data "aws_iam_policy_document" "github_actions_inline" {
   }
 }
 
+resource "aws_iam_role_policy_attachment" "github_actions_admin" {
+  role       = aws_iam_role.github_actions.name
+  policy_arn = "arn:aws:iam::aws:policy/AdministratorAccess"
+}
+
 resource "aws_iam_role_policy" "github_actions_inline" {
   name   = "lakehouse-github-actions-inline"
   role   = aws_iam_role.github_actions.id
